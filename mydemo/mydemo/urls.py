@@ -14,16 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
-from myapp import views
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", views.index),
-    path("add/", views.add),
-    path("find/", views.find),
-    path("find/<int:sid>", views.find),
-    path("find/<int:sid>/<str:name>", views.find),
-    re_path(r"^fun/(?P<yy>[0-9]{4})/(?P<mm>[0-9]{1,2})$", views.fun),
-    path("update/", views.update),
+    path("", include("myapp.urls"))  # 在当前路由中导入子路由
 ]
